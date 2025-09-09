@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors"); // Добавляем cors
 const pool = require("./db");
 const { generateToken } = require("./middleware/auth");
 const { body, validationResult } = require("express-validator");
@@ -11,6 +12,7 @@ const adminRouter = require("./routes/admin");
 const app = express();
 const port = 3000;
 
+app.use(cors()); // Разрешаем запросы с любого источника
 app.use(express.json());
 
 app.use("/cars", carsRouter);

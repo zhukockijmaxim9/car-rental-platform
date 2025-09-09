@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-title>Manage Cars</mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Model</mat-label>
+      <input matInput #model />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Year</mat-label>
+      <input matInput type="number" #year />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Price per Day</mat-label>
+      <input matInput type="number" #price />
+    </mat-form-field>
+    <button mat-raised-button (click)="addCar(model.value, year.value, price.value)">
+      Add Car
+    </button>
+    <mat-list>
+      <mat-list-item *ngFor="let car of cars">
+        {{ car.model }} ({{ car.year }}) - ${{ car.price_per_day }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
