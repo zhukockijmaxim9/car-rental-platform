@@ -6,6 +6,7 @@ import BookCar from "./pages/BookCar";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Review from "./pages/Review";
 
 function ProtectedRoute({ token, children }) {
   return token ? children : <Navigate to="/login" />;
@@ -37,6 +38,14 @@ function App() {
         />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/register" element={<Register setToken={setToken} />} />
+        <Route
+          path="/review/:id"
+          element={
+            <ProtectedRoute token={token}>
+              <Review token={token} />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
