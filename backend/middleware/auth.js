@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 
 const SECRET_KEY = "your-secret-key"; // В продакшене спрячь в .env
 
@@ -17,4 +16,9 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-module.exports = { generateToken, verifyToken };
+const isAdmin = (req, res, next) => {
+  if (req.user.role !== "admin") return res.status(403).json({ error: "Admin access required" });
+  next();
+};
+
+module.exports = { generateToken, verifyToken, isAdmin };

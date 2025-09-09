@@ -1,12 +1,22 @@
 const express = require("express");
 const pool = require("./db");
-const { generateToken } = require("./auth");
+const { generateToken } = require("./middleware/auth");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
+const carsRouter = require("./routes/cars");
+const bookingsRouter = require("./routes/bookings");
+const reviewsRouter = require("./routes/reviews");
+const adminRouter = require("./routes/admin");
+
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+
+app.use("/cars", carsRouter);
+app.use("/bookings", bookingsRouter);
+app.use("/reviews", reviewsRouter);
+app.use("/admin", adminRouter);
 
 // Register
 app.post(
