@@ -11,12 +11,15 @@ function Register({ setToken }) {
 
   const handleRegister = async () => {
     try {
-      const res = await axios.post("/register", { name, email, password });
+      const res = await axios.post("http://localhost:3000/register", { name, email, password });
       setToken(res.data.token);
       localStorage.setItem("token", res.data.token);
       navigate("/profile");
     } catch (err) {
-      alert(err.response?.data?.error || "Registration failed");
+      const errorMsg = err.response?.data?.errors
+        ? err.response.data.errors.map((e) => e.msg).join(", ")
+        : err.response?.data?.error || "Registration failed";
+      alert(`Error: ${errorMsg}`);
     }
   };
 

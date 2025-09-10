@@ -10,12 +10,13 @@ function Login({ setToken }) {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("/login", { email, password });
+      const res = await axios.post("http://localhost:3000/login", { email, password });
       setToken(res.data.token);
       localStorage.setItem("token", res.data.token);
       navigate("/profile");
     } catch (err) {
-      alert(err.response?.data?.error || "Login failed");
+      const errorMsg = err.response?.data?.error || "Login failed";
+      alert(`Error: ${errorMsg}`);
     }
   };
 
